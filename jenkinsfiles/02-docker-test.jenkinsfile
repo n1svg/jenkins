@@ -1,0 +1,26 @@
+#!groovy
+// Check host propertys
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+        ansiColor('xterm')
+    }
+    stages {
+        stage("Test Docker build engine") {
+            steps {
+                echo "###################  START  BUILDING  ##############"
+                agent {
+                    docker {
+                        image 'hello-world'
+                    }
+                }
+            }
+        }
+    }
+}
