@@ -16,8 +16,6 @@ pipeline {
     stages {
         stage("Test Docker engine from jenkins man") {
             steps {
-                sh 'lsb_release -a'
-                sh 'uname -a'
                 sh 'ps aux'
             }
         }
