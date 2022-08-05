@@ -27,5 +27,7 @@ pipeline {
             steps {
                 def customImage = docker.build("testimage:${env.BUILD_ID}")
         }
-    }
+     }
+   }
+ }
 }
