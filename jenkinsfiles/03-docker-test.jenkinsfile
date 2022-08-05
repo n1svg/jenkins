@@ -16,7 +16,8 @@ pipeline {
     stages {
         stage("Test Docker engine from jenkins man") {
             steps {
-                sh 'ps aux'
+                sh 'uname -a'
+                sh 'hostname'
             }
         }
     }
