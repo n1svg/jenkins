@@ -25,10 +25,7 @@ pipeline {
             }
         }
         stage("Tag image") {
-            steps {
-                def customImage = docker.image("testimage:${env.BUILD_ID}")
-                
-            }
+            def customImage = docker.image("testimage:${env.BUILD_ID}")     
         }
     }
 }
