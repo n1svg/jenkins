@@ -10,7 +10,7 @@ pipeline {
             label 'master'
             }
         }
-        triggers { pollSCM('* * * * 1-5') }
+        triggers { pollSCM('*/5 * * * 1-5') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
