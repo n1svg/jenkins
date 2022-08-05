@@ -19,7 +19,9 @@ pipeline {
     stages {
         stage("Test Docker build from jenkins man") {
             steps {
-                sh 'ps'
+                sh 'nc -vz google.com'
+                echo '############ tls handshake  ########################'
+                sh 'curl -iv'
             }
         }
     }
