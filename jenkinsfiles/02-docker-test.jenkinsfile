@@ -15,10 +15,8 @@ pipeline {
         stage("Test Docker build engine") {
             steps {
                 echo "###################  START  BUILDING  ##############"
-                agent {
-                    docker {
-                        image 'hello-world'
-                    }
+                dir ('docker/test') {
+                    sh 'docker run hello-world'
                 }
             }
         }
