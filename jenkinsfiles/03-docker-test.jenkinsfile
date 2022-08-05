@@ -1,0 +1,25 @@
+#!groovy
+// Check host propertys
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        docker {
+            image 'debian:bullseye-slim'
+            }
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+        ansiColor('xterm')
+    }
+    stages {
+        stage("Test Docker engine from jenkins man") {
+            steps {
+                sh 'lsb_release -a'
+                sh 'uname -a'
+                sh 'ps aux'
+            }
+        }
+    }
+}
