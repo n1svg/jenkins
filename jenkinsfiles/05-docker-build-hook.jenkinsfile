@@ -8,11 +8,9 @@ pipeline {
             filename 'Dockerfile-01'
             dir 'docker/test'
             label 'master'
-            args '-t test'
-            additionalBuildArgs  '--build-arg version=latest'
             }
         }
-        triggers { pollSCM('*/5 * * * 1-5') }
+        triggers { pollSCM('H/5 * * * 1-5') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -25,6 +23,9 @@ pipeline {
                 echo '############ tls handshake  ########################'
                 sh 'curl -iv 1.1.1.1'
             }
+        stage("Tag image") {
+            steps {
+                def customImage = docker.build("testimage:${env.BUILD_ID}")
         }
     }
 }
