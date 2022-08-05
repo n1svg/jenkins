@@ -13,12 +13,12 @@ pipeline {
     }
     stages {
         stage("Test Docker build engine") {
-            steps {
-                echo "###################  START  BUILDING  ##############"
-                agent {
-                    docker {
-                        image 'hello-world'
+            agent {
+                docker {
+                    image 'hello-world'
                     }
+                steps {
+                echo "###################  START  BUILDING  ##############"
                 }
             }
         }
