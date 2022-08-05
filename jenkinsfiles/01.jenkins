@@ -1,0 +1,26 @@
+#!groovy
+// Check host propertys
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent { 
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+        ansiColor('xterm')
+    }
+    stages {
+        stage("First step") {
+            steps {
+                sh 'ssh 192.168.56.3 -i ~/.ssh/jenkins_agent_test  \'lsb_release -a && ping -c5 8.8.8.8\''
+            }
+        }
+        stage("Second step") {
+            steps {
+                sh 'ssh 192.168.56.3 -i ~/.ssh/jenkins_agent_test  \'uptime\''
+            }
+        }
+    }
+}
