@@ -15,4 +15,13 @@ pipeline {
         timestamps()
         ansiColor('xterm')
     }
+    stages {
+        stage("Test Docker build from jenkins man") {
+            steps {
+                sh 'ps'
+                sh 'hostname'
+                sh 'aws configure list'
+            }
+        }
+    }
 }
