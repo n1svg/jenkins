@@ -8,9 +8,15 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
+        skipDefaultCheckout()
         ansiColor('xterm')
         }
     stages {
+        stage('Checkout git'){
+            steps {
+                checkout scm
+            }
+        }
         stage('Building test image') {
             agent {
                 dockerfile {
