@@ -13,6 +13,11 @@ pipeline {
         }
     stages {
         stage('Checkout git'){
+            agent { 
+                node { 
+                label 'master' 
+                }
+            }
             steps {
                 checkout scm
             }
