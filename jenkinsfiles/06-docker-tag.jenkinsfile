@@ -4,7 +4,7 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent none
-    triggers { pollSCM('H/5 * * * *') }
+    /* triggers { pollSCM('H/5 * * * *') } */
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -43,10 +43,7 @@ pipeline {
                     }
                 }
         stage( 'Tagging image' ) {
-            agent any
-            when {
-            branch 'master'
-            }
+            /* agent any */
             steps {
                 script {
                     def dockerImage = docker.build("alpine_test:snapshot")
