@@ -23,11 +23,6 @@ pipeline {
                 echo '############ tls handshake  ########################'
                 sh 'curl -iv 1.1.1.1'
             }
-        }
-        stage("Tag image") {
-            steps {
-            sh 'docker build -t testimage:${env.BUILD_ID}'
-            }
-        }
+        }           
     }
 }
