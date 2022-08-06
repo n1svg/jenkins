@@ -45,9 +45,7 @@ pipeline {
         stage( 'Tagging image' ) {
             /* agent any */
             steps {
-                script {
-                    def dockerImage = docker.build("alpine_test:snapshot")
-                }
+                sh 'docker build -t alpine_test:latest . '
             }
         }
         stage( 'Push image' ) {
