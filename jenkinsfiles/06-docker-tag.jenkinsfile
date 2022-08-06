@@ -11,40 +11,45 @@ pipeline {
         skipDefaultCheckout()
         ansiColor('xterm')
         }
-    stages{
-        stage( 'Building test image' ) {
+    stages {
+        stage('Building test image') {
             agent {
                 dockerfile {
                 filename 'Dockerfile-01'
                 dir 'docker/test'
                 }
               }
-            }
             stages {
                 stage('BUILD') {
                     steps {
                         echo '######### BUILD PAYLOAD  ######'
                     }
                 }
-            
-                stage( 'Testing image' ) {
+                stage('Testing image') {
                     steps {
                         sh 'nc -vz 8.8.8.8 443'
                         echo '############ tls handshake  ########################'
                         sh 'curl -iv 1.1.1.1'
                     }
                 }
-        }
         stage( 'Tagging image' ) {
-            script {
-                def dockerImage = docker.build("alpine_test:snapshot")
+            agent any
+            when {
+            branch 'master'
+            }
+            steps {
+                script {
+                    def dockerImage = docker.build("alpine_test:snapshot")
+                }
             }
         }
         stage( 'Push image' ) {
-            script {
-                echo ' ###### push image to registry  ###########  '
+            steps {
+               sh 'echo " ###### push image to registry  ########### " '
             }
         }
        /* sh "docker rmi ${env.IMAGE_NAME} ${env.IMAGE_NAME_LATEST}"  */     
+      }
     }
+  }
 }
