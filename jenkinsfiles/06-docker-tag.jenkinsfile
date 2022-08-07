@@ -48,6 +48,8 @@ pipeline {
             steps {
                 sh 'printenv'
                 sh 'ls -la'
+                sh 'docker container ls'
+                sh 'docker image ls'
             }
         }
         stage( 'Push image' ) {
