@@ -44,12 +44,15 @@ pipeline {
                     }
                 }
         stage( 'Tagging image' ) {
-            steps {
-                dir ('docker/test') {
-                    sh 'printenv'
-                    sh 'ls -la'
-                    sh 'docker image ls'
+            agent { 
+                node { 
+                label 'master' 
                 }
+            }
+            steps {
+                sh 'printenv'
+                sh 'ls -la'
+                sh 'docker image ls' 
             }
         }
         stage( 'Push image' ) {
