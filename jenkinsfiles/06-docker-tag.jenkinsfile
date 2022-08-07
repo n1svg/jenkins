@@ -46,7 +46,8 @@ pipeline {
         stage( 'Tagging image' ) {
             /* agent any */
             steps {
-                sh 'docker tag alpine_test:latest '
+                sh 'printenv'
+                sh 'ls -la'
             }
         }
         stage( 'Push image' ) {
