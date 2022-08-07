@@ -15,7 +15,7 @@ pipeline {
         stage ('Docker login') {
             steps {
                 echo '###############  LOGIN TO LOCAL REGISTRY #############'
-                withCredentials ([usernamePassword(credentialsID: 'lockal_registry_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'lockal_registry_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh """
                     docker login localhost:5000 -u $USERNAME -p $PASSWORD
                     """
@@ -26,8 +26,16 @@ pipeline {
             steps {
                 echo "################  BUILD  ##############"
                 dir ('docker/test') {
-                    sh 'docker build -f Dockerfile-01 -t test_alpine:0.0.1 .'
+                    sh 'docker build -f Dockerfile-01 -t localhost/test_alpine:0.0.1 .'
                 }
+            }
+        }
+        stage ('Docker PUSH') {
+            steps {
+                sh 'curl -v localhost:5000'
+                sh """
+                docker push localhost/test_alpine:0.0.1
+                """
             }
         }
     }
