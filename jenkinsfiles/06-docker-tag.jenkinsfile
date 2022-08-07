@@ -12,6 +12,16 @@ pipeline {
         ansiColor('xterm')
     }
     stages {
+        stage ('Docker login') {
+            steps {
+                echo '###############  LOGIN TO LOCAL REGISTRY #############'
+                withCredentials ([usernamePassword(credentialsID: 'lockal_registry_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login localhost:5000 -u $USERNAME -p $PASSWORD
+                    """
+                }
+            }
+        }
         stage ('Docker_build') {
             steps {
                 echo "################  BUILD  ##############"
