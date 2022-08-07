@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo "################  BUILD  ##############"
                 dir ('docker/test') {
-                    sh 'docker build -f Dockerfile-01 -t localhost/test_alpine:0.0.1 .'
+                    sh 'docker build -f Dockerfile-01 -t localhost:5000/test_alpine:0.0.1 .'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 sh 'curl -v localhost:5000'
                 sh """
-                docker push localhost/test_alpine:0.0.1
+                docker push localhost:5000/test_alpine:0.0.1
                 """
             }
         }
