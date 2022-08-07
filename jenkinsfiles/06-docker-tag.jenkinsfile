@@ -44,10 +44,11 @@ pipeline {
                     }
                 }
         stage( 'Tagging image' ) {
-            /* agent any */
             steps {
+                dir ('docker/test')
                 sh 'printenv'
                 sh 'ls -la'
+                sh 'docker image ls'
             }
         }
         stage( 'Push image' ) {
