@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo "################  BUILD  ##############"
                 dir ('docker/test') {
-                    sh 'docker build -t test_alpine:0.0.1 -f Dockerfile-01 '
+                    sh 'docker build -f Dockerfile-01 -t test_alpine:0.0.1 .'
                 }
             }
         }
