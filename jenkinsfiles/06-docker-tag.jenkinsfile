@@ -42,10 +42,11 @@ pipeline {
                         sh 'curl -i 1.1.1.1'
                     }
                 }
-            }    
+            }
+        }  
         stage( 'Tagging image' ) {
             steps {
-                dir( "${env.WORKSPACE/docker/test}") {
+                dir( "~/docker/test}") {
                     sh 'printenv'
                     sh 'ls -la'
                     sh 'docker image ls'
@@ -60,4 +61,3 @@ pipeline {
        /* sh "docker rmi ${env.IMAGE_NAME} ${env.IMAGE_NAME_LATEST}"  */
     }
   }
-}
