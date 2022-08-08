@@ -54,7 +54,8 @@ pipeline {
                     sh 'printenv'
                     sh 'ls -la'
                     sh 'docker image ls' 
-                    sh "cat $RUN_ARTIFACTS_DISPLAY_URL/pipeline.log | grep 'build -t' | cut -d ' ' -f 4 "  
+                    sh 'cat $LOGNAME'
+                    //sh "cat $RUN_ARTIFACTS_DISPLAY_URL/pipeline.log | grep 'build -t' | cut -d ' ' -f 4 "  
             }
         }
        /* stage( 'Push image' ) {
