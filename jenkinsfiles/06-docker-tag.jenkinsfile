@@ -46,11 +46,11 @@ pipeline {
         }  
         stage( 'Tagging image' ) {
             steps {
-               // dir ("docker/test") {
+               /*  dir ("docker/test") {*/
                     sh 'printenv'
                     sh 'ls -la'
                     sh 'docker image ls'
-               // }        
+               /* } */        
             }
         }
         stage( 'Push image' ) {
