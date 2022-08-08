@@ -45,6 +45,11 @@ pipeline {
             }
         }  
         stage( 'Tagging image' ) {
+            agent { 
+                node { 
+                label 'master' 
+                }
+            }
             steps {
                /*  dir ("docker/test") {*/
                     sh 'printenv'
