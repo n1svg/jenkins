@@ -1,0 +1,10 @@
+#!groovy
+
+node ('master') {
+    docker.dockerfile(
+        dir: 'docker/test'
+        filename : 'Dockerfile-01') {
+
+
+        } 
+}
