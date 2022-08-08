@@ -51,18 +51,17 @@ pipeline {
                 }
             }
             steps {
-               /*  dir ("docker/test") {*/
                     sh 'printenv'
                     sh 'ls -la'
-                    sh 'docker image ls'
-               /* } */        
+                    sh 'docker image ls' 
+                    sh "cat $RUN_ARTIFACTS_DISPLAY_URL/pipeline.log | grep 'build -t' | cut -d ' ' -f 4 "  
             }
         }
-        stage( 'Push image' ) {
+       /* stage( 'Push image' ) {
             steps {
                sh 'echo " ###### push image to registry  ########### " '
             }
-        }
+        } */
        /* sh "docker rmi ${env.IMAGE_NAME} ${env.IMAGE_NAME_LATEST}"  */
     }
   }
