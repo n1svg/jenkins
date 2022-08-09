@@ -56,7 +56,7 @@ pipeline {
                     sh """
                     docker login localhost:5000 -u $USERNAME -p $PASSWORD
                     """
-                    sh "curl -su $USERNAME:$PASSWORD localhost:8080/job/$JOB_BASE_NAME/lastBuild/consoleText | grep 'build -t [a-z0-9]' | cut -d ' ' -f 6" >> tmp_param.txt
+                    sh "curl -su $USERNAME:$PASSWORD localhost:8080/job/$JOB_BASE_NAME/lastBuild/consoleText | grep 'build -t [a-z0-9]' | cut -d ' ' -f 6 >> tmp_param.txt"
                     sh 'cat tmp_param.txt'
                     script {
                         image = readFile('tmp_param.txt').trim()
