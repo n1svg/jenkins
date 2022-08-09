@@ -51,11 +51,19 @@ pipeline {
                 }
             }
             steps {
+                withCredentials([usernamePassword(credentialsId: 'lockal_registry_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login localhost:5000 -u $USERNAME -p $PASSWORD
+                    """
+                    sh "curl -su $USERNAME:$PASSWORD localhost:8080/job/$JOB_BASE_NAME/lastBuild/consoleText | grep 'build -t [a-z0-9]' | cut -d ' ' -f 6" >> tmp_param.txt
+                    sh 'cat tmp_param.txt'
+                    sript {
+                        image = readFile('tmp_param.txt').trim()
+                    }
                     sh 'printenv'
-                    sh 'ls -la'
+                    sh "docker tag ${image} localhost:5000/test_alpine:$JOB_BASE_NAME_$BUILD_DISPLAY_NAME"
                     sh 'docker image ls' 
-                    sh 'cat $LOGNAME'
-                    //sh "cat $RUN_ARTIFACTS_DISPLAY_URL/pipeline.log | grep 'build -t' | cut -d ' ' -f 4 "  
+                }  
             }
         }
        /* stage( 'Push image' ) {
