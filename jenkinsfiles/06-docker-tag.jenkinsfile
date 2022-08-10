@@ -62,7 +62,7 @@ pipeline {
                         image = readFile('tmp_param.txt').trim()
                     }
                     sh 'printenv'
-                    sh "docker tag ${image} localhost:5000/test_alpine:${JOB_BASE_NAME}.${BUILD_DISPLAY_NAME}"
+                    sh "docker tag ${image} localhost:5000/test_alpine:${BUILD_TAG}"
                     sh 'docker image ls' 
                 }  
             }
