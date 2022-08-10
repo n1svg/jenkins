@@ -68,6 +68,11 @@ pipeline {
             }
         }
         stage( 'Push image' ) {
+            agent { 
+                node { 
+                label 'master' 
+                }
+            }
             steps {
                sh 'echo " ###### Push image to registry  ########### " '
                sh 'docker push localhost:5000/test_alpine:${BUILD_TAG}'
