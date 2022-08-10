@@ -76,7 +76,6 @@ pipeline {
             steps {
                sh 'echo " ###### Push image to registry  ########### " '
                sh 'docker push localhost:5000/test_alpine:${BUILD_TAG}'
-               sh 'curl -X GET -u $USERNAME:$PASSWORD localhost:5000/v2/test_alpine/tags/list'
             }
         } 
        /* sh "docker rmi ${env.IMAGE_NAME} ${env.IMAGE_NAME_LATEST}"  */
