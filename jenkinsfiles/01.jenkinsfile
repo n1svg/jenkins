@@ -14,12 +14,16 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh 'ssh 192.168.56.3 -i ~/.ssh/jenkins_agent_test  \'lsb_release -a && ping -c5 8.8.8.8\''
+                sshagent (credentials: ['jenkins_agent_test']) {
+                sh 'ssh 192.168.56.3   lsb_release -a && ping -c5 8.8.8.8'
+                }
             }
         }
         stage("Second step") {
             steps {
-                sh 'ssh 192.168.56.3 -i ~/.ssh/jenkins_agent_test  \'uptime\''
+                sshagent (credentials: ['jenkins_agent_test']) {
+                sh 'ssh -vvv 192.168.56.3   uptime'
+                }
             }
         }
     }
